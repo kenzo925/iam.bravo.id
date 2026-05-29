@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iam.bravo.id</title>
+    
+    <!-- CDN Scripts & Fonts -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="hex-bg">
+
+    <!-- Matrix Canvas -->
+    <canvas id="matrix-canvas"></canvas>
+
+    <!-- Scanline Overlay -->
+    <div class="scanline"></div>
+
+    <!-- Noise Overlay -->
+    <div class="noise-overlay"></div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast"></div>
+
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+            <a href="#home" class="flex items-center gap-3 group">
+                <div class="w-8 h-8 rounded bg-gradient-to-br from-green-500 to-green-700 flex items-center justify-center font-mono text-black text-sm font-bold">B</div>
+                <span class="font-mono text-sm text-green-400 group-hover:text-green-300 transition-colors">iam.bravo<span class="text-green-600">.id</span></span>
+            </a>
+
+            <div class="hidden md:flex items-center gap-8">
+                <a href="#home" class="nav-link text-xs font-mono uppercase tracking-widest text-neutral-400 hover:text-green-400 transition-colors active">Home</a>
+                <a href="#about" class="nav-link text-xs font-mono uppercase tracking-widest text-neutral-400 hover:text-green-400 transition-colors">About</a>
+                <a href="#skills" class="nav-link text-xs font-mono uppercase tracking-widest text-neutral-400 hover:text-green-400 transition-colors">Skills</a>
+                <a href="#quotes" class="nav-link text-xs font-mono uppercase tracking-widest text-neutral-400 hover:text-green-400 transition-colors">Quotes</a>
+                <a href="#services" class="nav-link text-xs font-mono uppercase tracking-widest text-neutral-400 hover:text-green-400 transition-colors">Services</a>
+                <a href="#contact" class="nav-link text-xs font-mono uppercase tracking-widest text-neutral-400 hover:text-green-400 transition-colors">Contact</a>
+            </div>
+
+            <div class="flex items-center gap-4">
+                <div class="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full border border-green-500/20 bg-green-500/5">
+                    <div class="w-1.5 h-1.5 rounded-full bg-green-500 status-online"></div>
+                    <span class="text-[10px] font-mono text-green-400 uppercase tracking-wider">Online</span>
+                </div>
+                <button id="mobile-toggle" class="md:hidden text-neutral-400 hover:text-green-400 transition-colors">
+                    <span class="iconify" data-icon="lucide:menu" data-width="22"></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="mobile-menu fixed top-0 right-0 bottom-0 w-72 z-50">
+        <div class="p-6">
+            <div class="flex justify-between items-center mb-10">
+                <span class="font-mono text-green-400 text-sm">menu.sh</span>
+                <button id="mobile-close" class="text-neutral-400 hover:text-green-400 transition-colors">
+                    <span class="iconify" data-icon="lucide:x" data-width="22"></span>
+                </button>
+            </div>
+            <div class="flex flex-col gap-6">
+                <a href="#home" class="mobile-link font-mono text-sm text-neutral-400 hover:text-green-400 transition-colors">// Home</a>
+                <a href="#about" class="mobile-link font-mono text-sm text-neutral-400 hover:text-green-400 transition-colors">// About</a>
+                <a href="#skills" class="mobile-link font-mono text-sm text-neutral-400 hover:text-green-400 transition-colors">// Skills</a>
+                <a href="#quotes" class="mobile-link font-mono text-sm text-neutral-400 hover:text-green-400 transition-colors">// Quotes</a>
+                <a href="#services" class="mobile-link font-mono text-sm text-neutral-400 hover:text-green-400 transition-colors">// Services</a>
+                <a href="#contact" class="mobile-link font-mono text-sm text-neutral-400 hover:text-green-400 transition-colors">// Contact</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== HERO ========== -->
+    <section id="home" class="relative min-h-screen flex items-center justify-center px-6">
+        <div class="relative z-10 max-w-4xl mx-auto text-center">
+            <div class="mb-6 inline-flex items-center gap-2 px-4 py-2 rounded-full border border-green-500/20 bg-green-500/5">
+                <div class="w-1.5 h-1.5 rounded-full bg-green-500 status-online"></div>
+                <span class="text-[10px] font-mono text-green-400 uppercase tracking-widest">System Initialized</span>
+            </div>
+
+            <h1 class="font-orbitron text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight mb-4">
+                <span class="glitch glow-green text-green-400" data-text="iam.bravo">iam.bravo</span><span class="text-green-600">.id</span>
+            </h1>
+
+            <div class="h-8 mb-8 flex items-center justify-center">
+                <span class="font-mono text-sm md:text-base text-neutral-400">
+                    <span id="typed-text" class="text-green-400"></span>
+                </span>
+                <span class="typing-cursor"></span>
+            </div>
+
+            <p class="text-neutral-500 text-sm md:text-base font-light max-w-2xl mx-auto mb-10 leading-relaxed">
+                Penjelajah dunia digital. Penembus sistem. Pemikir yang percaya bahwa <span class="text-green-400/80">kebebasan digital</span> adalah hak asasi, bukan komoditas.
+            </p>
+
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a href="#about" class="group flex items-center gap-2 px-8 py-3 bg-green-500 text-black font-mono text-xs uppercase tracking-wider font-semibold rounded hover:bg-green-400 transition-all duration-300 btn-glow">
+                    Explore Profile
+                    <span class="iconify group-hover:translate-x-1 transition-transform" data-icon="lucide:arrow-right" data-width="14"></span>
+                </a>
+                <a href="#contact" class="flex items-center gap-2 px-8 py-3 border border-green-500/30 text-green-400 font-mono text-xs uppercase tracking-wider font-medium rounded hover:bg-green-500/10 hover:border-green-500/50 transition-all duration-300">
+                    <span class="iconify" data-icon="lucide:terminal" data-width="14"></span>
+                    Contact Me
+                </a>
+            </div>
+
+            <div class="mt-16 grid grid-cols-3 gap-8 max-w-lg mx-auto">
+                <div class="text-center">
+                    <div class="font-orbitron text-2xl md:text-3xl font-bold text-green-400 counter" data-target="150">0</div>
+                    <div class="text-[10px] font-mono text-neutral-500 uppercase tracking-wider mt-1">Projects</div>
+                </div>
+                <div class="text-center">
+                    <div class="font-orbitron text-2xl md:text-3xl font-bold text-green-400 counter" data-target="8">0</div>
+                    <div class="text-[10px] font-mono text-neutral-500 uppercase tracking-wider mt-1">Years Exp</div>
+                </div>
+                <div class="text-center">
+                    <div class="font-orbitron text-2xl md:text-3xl font-bold text-green-400 counter" data-target="99">0</div>
+                    <div class="text-[10px] font-mono text-neutral-500 uppercase tracking-wider mt-1">% Uptime</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2">
+            <span class="text-[9px] font-mono text-neutral-600 uppercase tracking-widest">Scroll</span>
+            <div class="w-5 h-8 rounded-full border border-green-500/20 flex justify-center pt-1.5">
+                <div class="w-1 h-2 bg-green-500/50 rounded-full animate-bounce"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== ABOUT ========== -->
+    <section id="about" class="relative py-24 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="reveal mb-16">
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="h-px w-12 bg-green-500/50"></div>
+                    <span class="text-[10px] font-mono text-green-400 uppercase tracking-widest">01 // About</span>
+                </div>
+                <h2 class="font-orbitron text-3xl md:text-4xl font-bold text-neutral-200">Who Am I<span class="text-green-500">.</span></h2>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="reveal flex justify-center">
+                    <div class="relative">
+                        <div class="rotating-border">
+                            <div class="w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-2 border-green-500/20">
+                                <img src="https://picsum.photos/seed/bravohacker/400/400.jpg" alt="iam.bravo.id" class="w-full h-full object-cover" style="filter: grayscale(30%) contrast(1.1);">
+                            </div>
+                        </div>
+                        <div class="absolute -top-2 -right-2 px-3 py-1.5 rounded bg-green-500/10 border border-green-500/20 backdrop-blur-sm">
+                            <span class="text-[10px] font-mono text-green-400">ETHICAL</span>
+                        </div>
+                        <div class="absolute -bottom-2 -left-2 px-3 py-1.5 rounded bg-green-500/10 border border-green-500/20 backdrop-blur-sm">
+                            <span class="text-[10px] font-mono text-green-400">PENTESTER</span>
+                        </div>
+                        <div class="absolute top-1/2 -right-16 px-3 py-1.5 rounded bg-green-500/10 border border-green-500/20 backdrop-blur-sm hidden md:block">
+                            <span class="text-[10px] font-mono text-green-400">SECURITY</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="reveal space-y-6">
+                    <div class="terminal-window">
+                        <div class="terminal-header">
+                            <div class="terminal-dot bg-red-500/80"></div>
+                            <div class="terminal-dot bg-yellow-500/80"></div>
+                            <div class="terminal-dot bg-green-500/80"></div>
+                            <span class="ml-3 text-[10px] font-mono text-neutral-500">bravo@kali: ~/about</span>
+                        </div>
+                        <div class="p-5 font-mono text-sm space-y-3">
+                            <div><span class="text-green-400">$</span> <span class="text-neutral-400">cat profile.json</span></div>
+                            <div class="text-neutral-300 pl-4">
+                                <p><span class="text-green-400">"name"</span>: <span class="text-amber-300">"iam.bravo.id"</span>,</p>
+                                <p><span class="text-green-400">"role"</span>: <span class="text-amber-300">"Cyber Security Specialist"</span>,</p>
+                                <p><span class="text-green-400">"location"</span>: <span class="text-amber-300">"Indonesia"</span>,</p>
+                                <p><span class="text-green-400">"philosophy"</span>: <span class="text-amber-300">"Freedom through knowledge"</span>,</p>
+                                <p><span class="text-green-400">"status"</span>: <span class="text-green-300">"Active"</span></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <p class="text-neutral-400 text-sm leading-relaxed">
+                        Saya adalah seorang profesional di bidang keamanan siber dengan fokus pada 
+                        <span class="text-green-400">penetration testing</span>, <span class="text-green-400">vulnerability assessment</span>, 
+                        dan <span class="text-green-400">digital forensics</span>. Dengan pengalaman bertahun-tahun mengeksplorasi 
+                        celah keamanan di berbagai sistem, saya memahami bahwa setiap baris kode memiliki cerita—dan 
+                        setiap celah adalah pintu yang menunggu dibuka.
+                    </p>
+                    <p class="text-neutral-400 text-sm leading-relaxed">
+                        Saya percaya pada etika hacker: <span class="text-green-400/80">membangun, bukan menghancurkan</span>. 
+                        Menemukan kerentanan bukan untuk mengeksploitasi, tapi untuk memperbaiki. Karena dunia digital 
+                        yang aman adalah hak semua orang.
+                    </p>
+
+                    <div class="grid grid-cols-2 gap-4 pt-4">
+                        <div class="p-3 rounded border border-green-500/10 bg-green-500/5">
+                            <div class="text-[10px] font-mono text-neutral-500 uppercase tracking-wider mb-1">Specialization</div>
+                            <div class="text-sm text-neutral-200">Penetration Testing</div>
+                        </div>
+                        <div class="p-3 rounded border border-green-500/10 bg-green-500/5">
+                            <div class="text-[10px] font-mono text-neutral-500 uppercase tracking-wider mb-1">Focus Area</div>
+                            <div class="text-sm text-neutral-200">Network Security</div>
+                        </div>
+                        <div class="p-3 rounded border border-green-500/10 bg-green-500/5">
+                            <div class="text-[10px] font-mono text-neutral-500 uppercase tracking-wider mb-1">Certifications</div>
+                            <div class="text-sm text-neutral-200">CEH / OSCP</div>
+                        </div>
+                        <div class="p-3 rounded border border-green-500/10 bg-green-500/5">
+                            <div class="text-[10px] font-mono text-neutral-500 uppercase tracking-wider mb-1">Availability</div>
+                            <div class="text-sm text-green-400">Open for Projects</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== SKILLS ========== -->
+    <section id="skills" class="relative py-24 px-6 section-gradient">
+        <div class="max-w-7xl mx-auto">
+            <div class="reveal mb-16">
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="h-px w-12 bg-green-500/50"></div>
+                    <span class="text-[10px] font-mono text-green-400 uppercase tracking-widest">02 // Skills</span>
+                </div>
+                <h2 class="font-orbitron text-3xl md:text-4xl font-bold text-neutral-200">Arsenal<span class="text-green-500">.</span></h2>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-8">
+                <div class="reveal space-y-5">
+                    <h3 class="font-mono text-xs text-green-400 uppercase tracking-wider mb-6">// Technical Proficiency</h3>
+                    
+                    <div class="space-y-4" id="skill-bars">
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="font-mono text-xs text-neutral-300">Penetration Testing</span>
+                                <span class="font-mono text-xs text-green-400">95%</span>
+                            </div>
+                            <div class="skill-bar h-1.5"><div class="skill-fill" data-width="95"></div></div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="font-mono text-xs text-neutral-300">Network Security</span>
+                                <span class="font-mono text-xs text-green-400">92%</span>
+                            </div>
+                            <div class="skill-bar h-1.5"><div class="skill-fill" data-width="92"></div></div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="font-mono text-xs text-neutral-300">Web Application Security</span>
+                                <span class="font-mono text-xs text-green-400">90%</span>
+                            </div>
+                            <div class="skill-bar h-1.5"><div class="skill-fill" data-width="90"></div></div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="font-mono text-xs text-neutral-300">Digital Forensics</span>
+                                <span class="font-mono text-xs text-green-400">85%</span>
+                            </div>
+                            <div class="skill-bar h-1.5"><div class="skill-fill" data-width="85"></div></div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="font-mono text-xs text-neutral-300">Reverse Engineering</span>
+                                <span class="font-mono text-xs text-green-400">80%</span>
+                            </div>
+                            <div class="skill-bar h-1.5"><div class="skill-fill" data-width="80"></div></div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="font-mono text-xs text-neutral-300">Social Engineering</span>
+                                <span class="font-mono text-xs text-green-400">88%</span>
+                            </div>
+                            <div class="skill-bar h-1.5"><div class="skill-fill" data-width="88"></div></div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="font-mono text-xs text-neutral-300">Cryptography</span>
+                                <span class="font-mono text-xs text-green-400">78%</span>
+                            </div>
+                            <div class="skill-bar h-1.5"><div class="skill-fill" data-width="78"></div></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="reveal space-y-6">
+                    <h3 class="font-mono text-xs text-green-400 uppercase tracking-wider mb-6">// Tools & Technologies</h3>
+                    
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="cyber-card rounded-lg p-4 text-center">
+                            <span class="iconify text-green-400 mb-2 mx-auto" data-icon="simple-icons:kali" data-width="28"></span>
+                            <div class="font-mono text-xs text-neutral-300">Kali Linux</div>
+                        </div>
+                        <div class="cyber-card rounded-lg p-4 text-center">
+                            <span class="iconify text-green-400 mb-2 mx-auto" data-icon="simple-icons:burpsuite" data-width="28"></span>
+                            <div class="font-mono text-xs text-neutral-300">Burp Suite</div>
+                        </div>
+                        <div class="cyber-card rounded-lg p-4 text-center">
+                            <span class="iconify text-green-400 mb-2 mx-auto" data-icon="simple-icons:wireshark" data-width="28"></span>
+                            <div class="font-mono text-xs text-neutral-300">Wireshark</div>
+                        </div>
+                        <div class="cyber-card rounded-lg p-4 text-center">
+                            <span class="iconify text-green-400 mb-2 mx-auto" data-icon="simple-icons:metasploit" data-width="28"></span>
+                            <div class="font-mono text-xs text-neutral-300">Metasploit</div>
+                        </div>
+                        <div class="cyber-card rounded-lg p-4 text-center">
+                            <span class="iconify text-green-400 mb-2 mx-auto" data-icon="simple-icons:python" data-width="28"></span>
+                            <div class="font-mono text-xs text-neutral-300">Python</div>
+                        </div>
+                        <div class="cyber-card rounded-lg p-4 text-center">
+                            <span class="iconify text-green-400 mb-2 mx-auto" data-icon="simple-icons:docker" data-width="28"></span>
+                            <div class="font-mono text-xs text-neutral-300">Docker</div>
+                        </div>
+                        <div class="cyber-card rounded-lg p-4 text-center">
+                            <span class="iconify text-green-400 mb-2 mx-auto" data-icon="simple-icons:linux" data-width="28"></span>
+                            <div class="font-mono text-xs text-neutral-300">Linux</div>
+                        </div>
+                        <div class="cyber-card rounded-lg p-4 text-center">
+                            <span class="iconify text-green-400 mb-2 mx-auto" data-icon="simple-icons:nginx" data-width="28"></span>
+                            <div class="font-mono text-xs text-neutral-300">Nginx</div>
+                        </div>
+                    </div>
+
+                    <h3 class="font-mono text-xs text-green-400 uppercase tracking-wider mt-8 mb-4">// Programming Languages</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1.5 rounded text-[11px] font-mono border border-green-500/20 text-green-400 bg-green-500/5">Python</span>
+                        <span class="px-3 py-1.5 rounded text-[11px] font-mono border border-green-500/20 text-green-400 bg-green-500/5">Bash</span>
+                        <span class="px-3 py-1.5 rounded text-[11px] font-mono border border-green-500/20 text-green-400 bg-green-500/5">JavaScript</span>
+                        <span class="px-3 py-1.5 rounded text-[11px] font-mono border border-green-500/20 text-green-400 bg-green-500/5">C/C++</span>
+                        <span class="px-3 py-1.5 rounded text-[11px] font-mono border border-green-500/20 text-green-400 bg-green-500/5">Go</span>
+                        <span class="px-3 py-1.5 rounded text-[11px] font-mono border border-green-500/20 text-green-400 bg-green-500/5">Rust</span>
+                        <span class="px-3 py-1.5 rounded text-[11px] font-mono border border-green-500/20 text-green-400 bg-green-500/5">PHP</span>
+                        <span class="px-3 py-1.5 rounded text-[11px] font-mono border border-green-500/20 text-green-400 bg-green-500/5">SQL</span>
+                        <span class="px-3 py-1.5 rounded text-[11px] font-mono border border-green-500/20 text-green-400 bg-green-500/5">Ruby</span>
+                        <span class="px-3 py-1.5 rounded text-[11px] font-mono border border-green-500/20 text-green-400 bg-green-500/5">Assembly</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== QUOTES ========== -->
+    <section id="quotes" class="relative py-24 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="reveal mb-16">
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="h-px w-12 bg-green-500/50"></div>
+                    <span class="text-[10px] font-mono text-green-400 uppercase tracking-widest">03 // Manifesto</span>
+                </div>
+                <h2 class="font-orbitron text-3xl md:text-4xl font-bold text-neutral-200">My Words<span class="text-green-500">.</span></h2>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="reveal cyber-card quote-card rounded-lg p-8 flex flex-col justify-between min-h-[280px]">
+                    <div>
+                        <div class="text-green-500/30 text-6xl font-serif leading-none mb-4">"</div>
+                        <p class="text-neutral-200 text-base leading-relaxed font-light italic">
+                            Anda membeli perangkat mahal hanya untuk menyerahkan privasi dengan sukarela. Sungguh komedi yang mahal.
+                        </p>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-green-500/10 flex items-center gap-3">
+                        <div class="w-8 h-8 rounded-full bg-gradient-to-br from-green-500 to-green-700 flex items-center justify-center text-black text-xs font-bold font-mono">B</div>
+                        <div>
+                            <div class="text-xs font-mono text-green-400">iam.bravo.id</div>
+                            <div class="text-[10px] font-mono text-neutral-600">on Privacy</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="reveal cyber-card quote-card rounded-lg p-8 flex flex-col justify-between min-h-[280px]" style="transition-delay: 0.1s;">
+                    <div>
+                        <div class="text-green-500/30 text-6xl font-serif leading-none mb-4">"</div>
+                        <p class="text-neutral-200 text-base leading-relaxed font-light italic">
+                            Menjadi berbeda di dunia yang serba seragam adalah bentuk perlawanan paling sunyi.
+                        </p>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-green-500/10 flex items-center gap-3">
+                        <div class="w-8 h-8 rounded-full bg-gradient-to-br from-green-500 to-green-700 flex items-center justify-center text-black text-xs font-bold font-mono">B</div>
+                        <div>
+                            <div class="text-xs font-mono text-green-400">iam.bravo.id</div>
+                            <div class="text-[10px] font-mono text-neutral-600">on Individuality</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="reveal cyber-card quote-card rounded-lg p-8 flex flex-col justify-between min-h-[280px]" style="transition-delay: 0.2s;">
+                    <div>
+                        <div class="text-green-500/30 text-6xl font-serif leading-none mb-4">"</div>
+                        <p class="text-neutral-200 text-base leading-relaxed font-light italic">
+                            Saya tidak butuh senjata untuk menguasai kota; cukup satu koneksi jaringan yang tepat.
+                        </p>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-green-500/10 flex items-center gap-3">
+                        <div class="w-8 h-8 rounded-full bg-gradient-to-br from-green-500 to-green-700 flex items-center justify-center text-black text-xs font-bold font-mono">B</div>
+                        <div>
+                            <div class="text-xs font-mono text-green-400">iam.bravo.id</div>
+                            <div class="text-[10px] font-mono text-neutral-600">on Power</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="reveal mt-16 relative">
+                <div class="cyber-card rounded-xl p-10 md:p-14 text-center glow-box">
+                    <span class="iconify text-green-500/20 mx-auto mb-6" data-icon="lucide:quote" data-width="48"></span>
+                    <blockquote class="font-orbitron text-xl md:text-2xl lg:text-3xl font-light text-neutral-200 leading-relaxed glow-green">
+                        "Kode adalah bahasa kebebasan.<br class="hidden md:block"> 
+                        <span class="text-green-400">Yang menguasai kode, menguasai masa depan.</span>"
+                    </blockquote>
+                    <div class="mt-8 flex items-center justify-center gap-3">
+                        <div class="h-px w-8 bg-green-500/30"></div>
+                        <span class="font-mono text-xs text-green-400">iam.bravo.id</span>
+                        <div class="h-px w-8 bg-green-500/30"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== SERVICES ========== -->
+    <section id="services" class="relative py-24 px-6 section-gradient">
+        <div class="max-w-7xl mx-auto">
+            <div class="reveal mb-16">
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="h-px w-12 bg-green-500/50"></div>
+                    <span class="text-[10px] font-mono text-green-400 uppercase tracking-widest">04 // Services</span>
+                </div>
+                <h2 class="font-orbitron text-3xl md:text-4xl font-bold text-neutral-200">What I Do<span class="text-green-500">.</span></h2>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="reveal cyber-card rounded-xl p-7 group">
+                    <div class="w-12 h-12 rounded-lg bg-green-500/10 border border-green-500/20 flex items-center justify-center mb-5 group-hover:bg-green-500/20 transition-colors">
+                        <span class="iconify text-green-400" data-icon="lucide:shield-alert" data-width="22"></span>
+                    </div>
+                    <h3 class="font-mono text-base text-neutral-200 font-semibold mb-3">Penetration Testing</h3>
+                    <p class="text-neutral-500 text-sm leading-relaxed">Pengujian keamanan menyeluruh pada infrastruktur, aplikasi web, dan jaringan untuk mengidentifikasi kerentanan sebelum pihak lain mengeksploitasinya.</p>
+                </div>
+
+                <div class="reveal cyber-card rounded-xl p-7 group" style="transition-delay: 0.05s;">
+                    <div class="w-12 h-12 rounded-lg bg-green-500/10 border border-green-500/20 flex items-center justify-center mb-5 group-hover:bg-green-500/20 transition-colors">
+                        <span class="iconify text-green-400" data-icon="lucide:search-code" data-width="22"></span>
+                    </div>
+                    <h3 class="font-mono text-base text-neutral-200 font-semibold mb-3">Vulnerability Assessment</h3>
+                    <p class="text-neutral-500 text-sm leading-relaxed">Identifikasi, kuantifikasi, dan prioritisasi kerentanan dalam sistem untuk membangun strategi mitigasi yang efektif dan terukur.</p>
+                </div>
+
+                <div class="reveal cyber-card rounded-xl p-7 group" style="transition-delay: 0.1s;">
+                    <div class="w-12 h-12 rounded-lg bg-green-500/10 border border-green-500/20 flex items-center justify-center mb-5 group-hover:bg-green-500/20 transition-colors">
+                        <span class="iconify text-green-400" data-icon="lucide:fingerprint" data-width="22"></span>
+                    </div>
+                    <h3 class="font-mono text-base text-neutral-200 font-semibold mb-3">Digital Forensics</h3>
+                    <p class="text-neutral-500 text-sm leading-relaxed">Investigasi digital untuk menemukan bukti keamanan, menganalisis serangan yang terjadi, dan merekonstruksi kronologi insiden.</p>
+                </div>
+
+                <div class="reveal cyber-card rounded-xl p-7 group" style="transition-delay: 0.15s;">
+                    <div class="w-12 h-12 rounded-lg bg-green-500/10 border border-green-500/20 flex items-center justify-center mb-5 group-hover:bg-green-500/20 transition-colors">
+                        <span class="iconify text-green-400" data-icon="lucide:lock-keyhole" data-width="22"></span>
+                    </div>
+                    <h3 class="font-mono text-base text-neutral-200 font-semibold mb-3">Security Audit</h3>
+                    <p class="text-neutral-500 text-sm leading-relaxed">Evaluasi menyeluruh terhadap kebijakan keamanan, prosedur, dan implementasi teknis untuk memastikan kepatuhan standar keamanan.</p>
+                </div>
+
+                <div class="reveal cyber-card rounded-xl p-7 group" style="transition-delay: 0.2s;">
+                    <div class="w-12 h-12 rounded-lg bg-green-500/10 border border-green-500/20 flex items-center justify-center mb-5 group-hover:bg-green-500/20 transition-colors">
+                        <span class="iconify text-green-400" data-icon="lucide:bug" data-width="22"></span>
+                    </div>
+                    <h3 class="font-mono text-base text-neutral-200 font-semibold mb-3">Malware Analysis</h3>
+                    <p class="text-neutral-500 text-sm leading-relaxed">Analisis statis dan dinamis terhadap malware untuk memahami perilaku, tujuan, dan dampaknya terhadap sistem yang terinfeksi.</p>
+                </div>
+
+                <div class="reveal cyber-card rounded-xl p-7 group" style="transition-delay: 0.25s;">
+                    <div class="w-12 h-12 rounded-lg bg-green-500/10 border border-green-500/20 flex items-center justify-center mb-5 group-hover:bg-green-500/20 transition-colors">
+                        <span class="iconify text-green-400" data-icon="lucide:graduation-cap" data-width="22"></span>
+                    </div>
+                    <h3 class="font-mono text-base text-neutral-200 font-semibold mb-3">Security Training</h3>
+                    <p class="text-neutral-500 text-sm leading-relaxed">Program pelatihan keamanan siber untuk tim Anda, dari awareness hingga teknik pertahanan lanjutan against social engineering.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== CONTACT ========== -->
+    <section id="contact" class="relative py-24 px-6">
+        <div class="max-w-4xl mx-auto">
+            <div class="reveal mb-16 text-center">
+                <div class="flex items-center justify-center gap-3 mb-4">
+                    <div class="h-px w-12 bg-green-500/50"></div>
+                    <span class="text-[10px] font-mono text-green-400 uppercase tracking-widest">05 // Contact</span>
+                    <div class="h-px w-12 bg-green-500/50"></div>
+                </div>
+                <h2 class="font-orbitron text-3xl md:text-4xl font-bold text-neutral-200">Get In Touch<span class="text-green-500">.</span></h2>
+                <p class="text-neutral-500 text-sm mt-4 max-w-md mx-auto">Punya proyek yang butuh keamanan? Atau sekedar ingin berdiskusi? Kirim pesan terenkripsi Anda.</p>
+            </div>
+
+            <div class="reveal cyber-card rounded-xl p-8 md:p-10 glow-box">
+                <form id="contact-form" class="space-y-6">
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-[10px] font-mono text-green-400 uppercase tracking-wider mb-2">Name</label>
+                            <input type="text" placeholder="John Doe" required class="w-full px-4 py-3 bg-black/50 border border-green-500/15 rounded-lg font-mono text-sm text-neutral-200 placeholder-neutral-600 focus:outline-none focus:border-green-500/50 transition-colors">
+                        </div>
+                        <div>
+                            <label class="block text-[10px] font-mono text-green-400 uppercase tracking-wider mb-2">Email</label>
+                            <input type="email" placeholder="john@example.com" required class="w-full px-4 py-3 bg-black/50 border border-green-500/15 rounded-lg font-mono text-sm text-neutral-200 placeholder-neutral-600 focus:outline-none focus:border-green-500/50 transition-colors">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-mono text-green-400 uppercase tracking-wider mb-2">Subject</label>
+                        <input type="text" placeholder="Security Assessment" class="w-full px-4 py-3 bg-black/50 border border-green-500/15 rounded-lg font-mono text-sm text-neutral-200 placeholder-neutral-600 focus:outline-none focus:border-green-500/50 transition-colors">
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-mono text-green-400 uppercase tracking-wider mb-2">Message</label>
+                        <textarea rows="5" placeholder="Describe your security needs..." required class="w-full px-4 py-3 bg-black/50 border border-green-500/15 rounded-lg font-mono text-sm text-neutral-200 placeholder-neutral-600 focus:outline-none focus:border-green-500/50 transition-colors resize-none"></textarea>
+                    </div>
+                    <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+                        <div class="flex items-center gap-2">
+                            <span class="iconify text-green-500/40" data-icon="lucide:lock" data-width="14"></span>
+                            <span class="text-[10px] font-mono text-neutral-600">End-to-end encrypted</span>
+                        </div>
+                        <button type="submit" class="group flex items-center gap-2 px-8 py-3 bg-green-500 text-black font-mono text-xs uppercase tracking-wider font-semibold rounded hover:bg-green-400 transition-all duration-300 btn-glow">
+                            <span class="iconify" data-icon="lucide:send" data-width="14"></span>
+                            Send Message
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="reveal mt-12 flex items-center justify-center gap-6">
+                <a href="#" class="w-11 h-11 rounded-full border border-green-500/20 flex items-center justify-center text-neutral-500 hover:text-green-400 hover:border-green-500/50 hover:bg-green-500/5 transition-all duration-300">
+                    <span class="iconify" data-icon="lucide:github" data-width="18"></span>
+                </a>
+                <a href="#" class="w-11 h-11 rounded-full border border-green-500/20 flex items-center justify-center text-neutral-500 hover:text-green-400 hover:border-green-500/50 hover:bg-green-500/5 transition-all duration-300">
+                    <span class="iconify" data-icon="lucide:twitter" data-width="18"></span>
+                </a>
+                <a href="#" class="w-11 h-11 rounded-full border border-green-500/20 flex items-center justify-center text-neutral-500 hover:text-green-400 hover:border-green-500/50 hover:bg-green-500/5 transition-all duration-300">
+                    <span class="iconify" data-icon="lucide:linkedin" data-width="18"></span>
+                </a>
+                <a href="#" class="w-11 h-11 rounded-full border border-green-500/20 flex items-center justify-center text-neutral-500 hover:text-green-400 hover:border-green-500/50 hover:bg-green-500/5 transition-all duration-300">
+                    <span class="iconify" data-icon="lucide:mail" data-width="18"></span>
+                </a>
+                <a href="#" class="w-11 h-11 rounded-full border border-green-500/20 flex items-center justify-center text-neutral-500 hover:text-green-400 hover:border-green-500/50 hover:bg-green-500/5 transition-all duration-300">
+                    <span class="iconify" data-icon="simple-icons:telegram" data-width="18"></span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== FOOTER ========== -->
+    <footer class="relative py-12 px-6 border-t border-green-500/10">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+                <div class="flex items-center gap-3">
+                    <div class="w-6 h-6 rounded bg-gradient-to-br from-green-500 to-green-700 flex items-center justify-center font-mono text-black text-[10px] font-bold">B</div>
+                    <span class="font-mono text-xs text-neutral-500">iam.bravo.id</span>
+                </div>
+
+                <div class="font-mono text-[10px] text-neutral-600 text-center">
+                    <span class="text-green-500/40">$</span> echo "Built with passion & caffeine" <span class="text-green-500/40">&&</span> chmod +x future
+                </div>
+
+                <div class="font-mono text-[10px] text-neutral-600">
+                    &copy; 2025 iam.bravo.id // All rights reserved
+                </div>
+            </div>
+
+            <div class="mt-8 text-center">
+                <pre class="font-mono text-[8px] md:text-[10px] text-green-500/15 leading-tight inline-block">
+    ╔══════════════════════════════════════╗
+    ║  ┌──┬──┐ ╦ ╦╔═╗╔╦╗╔═╗╦═╗╔╦╗      ║
+    ║  │  ┤  │ ║║║╚═╗║║║╠═╣╠╦╝║║║ v2.0 ║
+    ║  └──┴──╝ ╚╩╝╚═╝╩ ╩╩ ╩╩╚═╩ ╩      ║
+    ╚══════════════════════════════════════╝
+                </pre>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Custom JS -->
+    <script src="script.js"></script>
+</body>
+</html>
